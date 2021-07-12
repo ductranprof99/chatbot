@@ -1,19 +1,32 @@
+from os import name
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
-chrome_options = Options()
-chrome_options.add_experimental_option("detach", True)
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
 
-def open_instagram():    
+
+chrome_options = Options()
+chrome_options.add_experimental_option("debuggerAddress", "localhost:8000")
+
+def open_messenger(opt):    
     try:
         # Connect
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("--incognito")
+        
         global browser # this will prevent the browser variable from being garbage collected
-        browser = webdriver.Chrome('./chromedriver.exe', chrome_options=chrome_options)
+        browser = webdriver.Chrome('./chromedriver.exe', options=opt)
         browser.set_window_size(1800, 900)
-        browser.get("https://www.instagram.com/accounts/login/?hl=de")
-        #browser.find_element(By.NAME, 'username').send_keys('MYEMAIL', Keys.TAB, 'MYPW', Keys.ENTER)
+        browser.get("https://www.messenger.com/login/")
+        WebDriverWait(browser, 5)
+        nameField = browser.find_element_by_xpath('//input[@id="email"]')
+        passwordField = browser.find_element_by_xpath('//input[@id="pass"]')
+        nameField.send_keys('email')
+        passwordField.send_keys('passwd',Keys.ENTER)
+        # browser.send_keys('0918139331',Keys.TAB)
+        # for i in listTag:
+        #     print(i)
     except Exception as e:
-        print (e, 'Instagram')
+        print (e, 'messenger')
 
-open_instagram()
+open_messenger(chrome_options)
