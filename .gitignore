@@ -1,2 +1,4 @@
 env
 chromedriver.exe
+__pycache__
+profileFolder
