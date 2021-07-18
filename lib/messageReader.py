@@ -10,20 +10,10 @@ from selenium.webdriver.support import expected_conditions as EC
 
 opt = Options()
 opt.add_experimental_option("debuggerAddress", "localhost:8000")
-
-
 browser = webdriver.Chrome('./chromedriver.exe', options=opt)
-
-# while(True):
-#     sleep(1)
-#     section_container_in =  browser.find_elements_by_xpath('//div[@data-testid="incoming_group"]')
-#     section_container_out =  browser.find_elements_by_xpath('//div[@data-testid="outgoing_group"]')
-#     for i in section_container_out:
-#         print(i.get_attribute('outerText'))
-    
+ 
 
 def detectIncomingMessage(browser):
-    sleep(1)
     section_container_in =  browser.find_elements_by_xpath('//div[@data-testid="messenger_incoming_text_row"]')
     for i in section_container_in:
         print(i.get_attribute('outerText'))
@@ -33,4 +23,18 @@ def detectOutcomingMessage(browser):
     for i in section_container_out:
         print(i.get_attribute('outerText'))
 
-detectIncomingMessage(browser=browser)
+
+def readMessageWithOrder(browser):
+    oleum =  browser.find_elements_by_xpath('//div[@role="grid"]')
+    message_section = oleum[1]
+    div_es = message_section.find_elements_by_xpath('//div')
+    orderMessages = []  # list of element
+    for eachDiv in div_es:
+        if(eachDiv.get_attribute('data-testid') == "outgoing_group" or eachDiv.get_attribute('data-testid') == "incoming_group"):
+            orderMessages.append(eachDiv)
+    for i in orderMessages:
+        print(i.get_attribute('outerText'))
+
+# detectIncomingMessage(browser=browser)
+
+readMessageWithOrder(browser)

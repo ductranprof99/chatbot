@@ -1,5 +1,6 @@
 
 import subprocess,os,sys,json
+from time import sleep
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -44,4 +45,4 @@ def open_messenger(opt,iter):
         print (e, 'messenger')
 
 open_messenger(chrome_options,account_stream)
-
+sleep(5)
