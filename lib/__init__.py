@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
-from . import partner
+
 
 chrome_options = Options()
 chrome_options.add_experimental_option("debuggerAddress", "localhost:8000")

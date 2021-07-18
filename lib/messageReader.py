@@ -32,8 +32,15 @@ def readMessageWithOrder(browser):
     for eachDiv in div_es:
         if(eachDiv.get_attribute('data-testid') == "outgoing_group" or eachDiv.get_attribute('data-testid') == "incoming_group"):
             orderMessages.append(eachDiv)
-    for i in orderMessages:
-        print(i.get_attribute('outerText'))
+    for eachDiv in orderMessages:
+        if(eachDiv.get_attribute('data-testid') == "outgoing_group"):
+            print("Out")
+            print(eachDiv.get_attribute('outerText'))
+            # xu li out
+        if(eachDiv.get_attribute('data-testid') == "incoming_group"):
+            print("In")
+            print(eachDiv.get_attribute('outerText'))
+            # xu li in 
 
 # detectIncomingMessage(browser=browser)
 
