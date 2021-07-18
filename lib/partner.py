@@ -1,4 +1,3 @@
-import subprocess,os,sys,json
 from time import sleep
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
@@ -14,11 +13,16 @@ opt.add_experimental_option("debuggerAddress", "localhost:8000")
 
 browser = webdriver.Chrome('./chromedriver.exe', options=opt)
 
-browser.get("https://www.messenger.com/t/*khach_id")
-while(True):
+def readPartner(browser):
     sleep(1)
-    section_container =  browser.find_elements_by_xpath('//div[@data-testid="incoming_group"]')
-    section_container =  browser.find_elements_by_xpath('//div[@data-testid="outgoing_group"]')
-    for i in section_container:
-        print(i.get_attribute('outerText'))
+    chat_container =  browser.find_element_by_xpath('//div[@aria-label="Chat"]')
+    listUser = chat_container.find_elements_by_xpath('//a')
+    count = 0
+    for i in listUser:
+        a =i.get_attribute('href')
+        if('/t/' in a):
+            print(a)
     
+def gotoStream(browser,fileStream):
+    pass
+

@@ -2,4 +2,4 @@ env
 chromedriver.exe
 __pycache__
 profileFolder
-account.txt
+account.json

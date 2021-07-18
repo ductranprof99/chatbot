@@ -6,7 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
-
+from selenium.webdriver.common.action_chains import ActionChains
+from . import partner
 
 chrome_options = Options()
 chrome_options.add_experimental_option("debuggerAddress", "localhost:8000")
@@ -24,23 +25,23 @@ if(os.path.isfile('./shellscript.ps1')):
               stdout=sys.stdout)
     p.communicate()
     
-scavenger = json.load(open('account.json'))
+account_stream = json.load(open('account.json'))
+partner_stream = json.load(open('partner.json'))
 
 def open_messenger(opt,iter):    
     try:
         # Connect
-        
         global browser # this will prevent the browser variable from being garbage collected
         browser = webdriver.Chrome('./chromedriver.exe', options=opt)
         browser.set_window_size(1800, 900)
         browser.get("https://www.messenger.com/login/")
         nameField = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="email"]')))
+        actionChains = ActionChains(browser)
+        actionChains.double_click(nameField).perform()
+        actionChains.send_keys(Keys.BACK_SPACE)
         nameField.send_keys(iter["username"],Keys.TAB,iter["password"],Keys.ENTER)
-        # while(True):
-        #     incomming_current_text_data = browser.find_element(By.XPATH,'//div[@data-testid="messenger_incoming_text_row"]//span//div//div[@dir=auto]') 
-        #     print(incomming_current_text_data)
     except Exception as e:
         print (e, 'messenger')
 
-open_messenger(chrome_options,scavenger)
+open_messenger(chrome_options,account_stream)
 
