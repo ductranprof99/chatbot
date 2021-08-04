@@ -46,3 +46,12 @@ def open_messenger(opt,iter):
 
 open_messenger(chrome_options,account_stream)
 sleep(5)
+
+import lib.messageReader as msgReader
+
+# msgReader.mazeRunner()
+
+import lib.partner as usr
+
+usr.readPartnerInBrowser()
+usr.partnerMessageQueue()

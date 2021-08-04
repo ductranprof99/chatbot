@@ -1,4 +1,3 @@
-import subprocess,os,sys,json
 from time import sleep
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
@@ -14,7 +13,7 @@ opt.add_experimental_option("debuggerAddress", "localhost:8000")
 browser = webdriver.Chrome('./chromedriver.exe', options=opt)
 
 
-def sendMessage(browser):
+def sendMessage(message=''):
     messageBox =  browser.find_element_by_xpath('//div[@contenteditable="true"]')
     actionChains = ActionChains(browser)
     actionChains.click(messageBox).perform()
@@ -24,4 +23,4 @@ def sendMessage(browser):
     sleep(10)
 
 while(True):
-    sendMessage(browser)
+    sendMessage()

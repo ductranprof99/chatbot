@@ -3,3 +3,5 @@ chromedriver.exe
 __pycache__
 profileFolder
 account.json
+log.json
+dataType.json
